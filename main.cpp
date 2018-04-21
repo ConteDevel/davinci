@@ -1,16 +1,26 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include <QCoreApplication>
+#include <QTextStream>
+#include <QDebug>
+#include <QtGui/QImage>
+#include <iostream>
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#include "opticalcharacterrecognizer.h"
 
-    QGuiApplication app(argc, argv);
+int main(int argc, char *argv[]){
+    QCoreApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
+    std::cout << "Image location: ";
+
+    std::string image_name;
+    std::cin >> image_name;
+
+    std::cout << image_name << '\n';
+    QImage image = QImage(image_name.c_str());
+
+    std::string output_text = OpticalCharacterRecognizer::StringTextFromQImage(image);
+    std::cout << output_text << '\n';
 
     return app.exec();
 }
