@@ -1,4 +1,4 @@
-QT -= gui
+QT += network
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -15,4 +15,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    yandextranslate.tpp \
+    opticalcharacterrecognizer.cpp
+
+HEADERS += \
+    yandextranslate.h \
+    opticalcharacterrecognizer.h
+
+unix|win32: LIBS += -ltesseract
+
+unix|win32: LIBS += -llept

@@ -8,13 +8,8 @@
 
 class YandexTranslate {
 public:
-    /*
-     * Копирование запрещено
-     */
     YandexTranslate(YandexTranslate& other) = delete;
-    /*
-     * Копирование запрещено
-     */
+
     void operator=(YandexTranslate& other) = delete;
 
     static YandexTranslate& SharedInstance();
@@ -33,7 +28,8 @@ private:
     template <class ReplyHandler>
     void _SendRequest(QUrl& url, ReplyHandler replyHandler);
 
-    QString _api_key = "trnsl.1.1.20180501T193302Z.e1161db67beb260f.4a21b8418a84c0b60f7f142c8e8f1432e9aee3a5";
+#warning Нельзя оставлять пустым
+    QString _api_key = "";
 };
 
 #include "yandextranslate.tpp"
