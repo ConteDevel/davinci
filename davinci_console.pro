@@ -16,12 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    yandextranslate.tpp \
-    opticalcharacterrecognizer.cpp
+    opticalcharacterrecognizer.cpp \
+    requestsender.tpp \
+    yandextranslate.cpp
 
 HEADERS += \
     yandextranslate.h \
-    opticalcharacterrecognizer.h
+    opticalcharacterrecognizer.h \
+    requestsender.h
 
 unix|win32: LIBS += -ltesseract
 

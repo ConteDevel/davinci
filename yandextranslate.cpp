@@ -1,6 +1,10 @@
+#include "yandextranslate.h"
+
 #include <QtNetwork>
 #include <QtGui>
 #include <QTextStream>
+
+#include "requestsender.h"
 
 /*!
  * \brief Возвращает синглтон.
@@ -9,31 +13,6 @@
 YandexTranslate &YandexTranslate::SharedInstance(){
     static YandexTranslate instance;
     return instance;
-}
-
-/*!
- * \fn YandexTranslate::_SendRequest(QUrl& url, ReplyHandler replyHandler)
- * \brief Отправляет запрос
- * Отправляет запрос по \a url и обрабатывает полученный QNetworkReply* с
- * помощью \a replyHandler.
- * \return
- */
-template <class ReplyHandler>
-void YandexTranslate::_SendRequest(QUrl& url, ReplyHandler replyHandler) {
-    qInfo() << QString("starting request...");
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-
-    auto manager = new QNetworkAccessManager();
-    auto event_loop = new QEventLoop();
-
-    QObject::connect(manager, &QNetworkAccessManager::finished,
-                     event_loop, &QEventLoop::quit);
-    QNetworkReply* reply = manager->get(request);
-    qInfo() << QString("staritng execution...");
-    event_loop->exec();
-    qInfo() << QString("handling data...");
-    replyHandler(reply);
 }
 
 /*!
@@ -50,7 +29,7 @@ QMap<QString, QString> YandexTranslate::SupportedLanguagesRequest(){
                     + QString("&ui=") + QString("en")
                     );
     QMap<QString, QString> response;
-    _SendRequest(url, [&response](QNetworkReply* reply){
+    RequestSender::SendRequest(url, [&response](QNetworkReply* reply){
         QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
         if(!obj.contains("langs")) {
             qDebug() << QString("Error getting json");
@@ -76,7 +55,7 @@ QString YandexTranslate::DetectLanguageRequest(const QString &text){
                     + QString("&text=") + text
                     );
     QString response;
-    _SendRequest(url, [&response](QNetworkReply* reply){
+    RequestSender::SendRequest(url, [&response](QNetworkReply* reply){
         QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
         if(!obj.contains("lang")) {
             qDebug() << QString("Error getting json");
@@ -106,7 +85,7 @@ QStringList YandexTranslate::TranslateTextRequest(const QString &text,
                         + QString("&text=") + text
                         );
     QStringList response;
-    _SendRequest(url, [&response](QNetworkReply* reply){
+    RequestSender::SendRequest(url, [&response](QNetworkReply* reply){
         QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
         if(!obj.contains("text")) {
             qDebug() << QString("Error getting json");

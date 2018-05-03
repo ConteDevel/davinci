@@ -25,13 +25,8 @@ public:
 private:
     YandexTranslate() = default;
 
-    template <class ReplyHandler>
-    void _SendRequest(QUrl& url, ReplyHandler replyHandler);
-
 #warning Нельзя оставлять пустым
-    QString _api_key = "";
+    QString _api_key = "trnsl.1.1.20180501T193302Z.e1161db67beb260f.4a21b8418a84c0b60f7f142c8e8f1432e9aee3a5";
 };
-
-#include "yandextranslate.tpp"
 
 #endif // YANDEXTRANSLATE_H
