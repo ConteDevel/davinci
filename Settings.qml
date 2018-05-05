@@ -131,8 +131,8 @@ ApplicationWindow {
                 Layout.columnSpan: 2
             }
 
-
         }
+
     }
 
 }

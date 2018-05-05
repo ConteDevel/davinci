@@ -2,6 +2,7 @@
     <qresource prefix="/qml">
         <file>Settings.qml</file>
         <file>SystemTray.qml</file>
-        <file>SettingsFactory.js</file>
+        <file>GUIFactory.js</file>
+        <file>Screenshot.qml</file>
     </qresource>
 </RCC>
