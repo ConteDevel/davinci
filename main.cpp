@@ -13,7 +13,6 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<GrabWindow>("daVinci", 1, 0, "GrabWindow");
-//    qmlRegisterType<Screenshot>("daVinci", 1, 0, "Screenshot");
 
     QUrl systemTrayUrl = QUrl(QStringLiteral("qrc:/qml/SystemTray.qml"));
     QUrl screenshotUrl = QUrl(QStringLiteral("qrc:/qml/Screenshot.qml"));

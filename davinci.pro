@@ -1,4 +1,4 @@
-QT += quick widgets
+QT += quick widgets network
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,7 +14,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     settings.cpp \
-    grab_window.cpp
+    grab_window.cpp \
+    opticalcharacterrecognizer.cpp \
+    requestsender.tpp \
+    yandextranslate.cpp
 
 RESOURCES += qml.qrc \
     img.qrc
@@ -34,4 +37,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     settings.h \
-    grab_window.h
+    grab_window.h \
+    yandextranslate.h \
+    opticalcharacterrecognizer.h \
+    requestsender.h
+    
+unix|win32: LIBS += -ltesseract
+
+unix|win32: LIBS += -llept
