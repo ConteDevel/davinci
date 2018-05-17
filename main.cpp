@@ -4,12 +4,19 @@
 
 #include "opticalcharacterrecognizer.h"
 #include "yandextranslate.h"
+#include "spellchecker.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     qInfo() << "Image location: ";
+
+    SpellChecker spell_checker(QString("/usr/share/hunspell/en_US.aff"),
+                               QString("/usr/share/hunspell/en_US.dic"));
+
+    QString test = spell_checker.CorrectedString("lavva flowq from mounta|n");
+    qInfo() << test;
 
     QTextStream text_stream(stdin);
 

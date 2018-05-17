@@ -1,6 +1,6 @@
 QT += network
 
-CONFIG += c++11 console
+CONFIG += c++14 console
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
@@ -18,13 +18,17 @@ SOURCES += \
         main.cpp \
     opticalcharacterrecognizer.cpp \
     requestsender.tpp \
-    yandextranslate.cpp
+    yandextranslate.cpp \
+    spellchecker.cpp
 
 HEADERS += \
     yandextranslate.h \
     opticalcharacterrecognizer.h \
-    requestsender.h
+    requestsender.h \
+    spellchecker.h
 
 unix|win32: LIBS += -ltesseract
 
 unix|win32: LIBS += -llept
+
+unix|win32: LIBS += -lhunspell
