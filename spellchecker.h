@@ -13,10 +13,12 @@ public:
 
     QString CorrectedString(const QString& input_string);
     QString CorrectedWord(const QString& input_word);
+    QString SpecialCharacterFreeString(QString& input_string);
+    QString SpecialCharacterFreeWord(QString input_word);
+
 
 private:
     std::unique_ptr<Hunspell> _hunspell_ptr;
-    QString _SpecialCharacterFreeWord(QString input_word);
 
 };
 

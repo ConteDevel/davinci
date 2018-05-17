@@ -12,12 +12,6 @@ int main(int argc, char *argv[])
 
     qInfo() << "Image location: ";
 
-    SpellChecker spell_checker(QString("/usr/share/hunspell/en_US.aff"),
-                               QString("/usr/share/hunspell/en_US.dic"));
-
-    QString test = spell_checker.CorrectedString("lavva flowq from mounta|n");
-    qInfo() << test;
-
     QTextStream text_stream(stdin);
 
     QString image_name = text_stream.readLine();
@@ -29,7 +23,13 @@ int main(int argc, char *argv[])
     output_text = output_text.simplified();
     qInfo() << output_text << '\n';
 
-    qInfo() << YandexTranslate::SharedInstance().TranslateTextRequest(output_text, "en", "ru");
+    SpellChecker spell_checker(QString("/usr/share/hunspell/en_US.aff"),
+                               QString("/usr/share/hunspell/en_US.dic"));
+
+    QString corrected_string = spell_checker.SpecialCharacterFreeString(output_text);
+    qInfo() << corrected_string << '\n';
+
+    qInfo() << YandexTranslate::SharedInstance().TranslateTextRequest(corrected_string, "en", "ru");
 
     return a.exec();
 }
