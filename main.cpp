@@ -1,5 +1,4 @@
-#include "grabwindow.h"
-#include "screenshot.h"
+#include "grab_window.h"
 #include <QColor>
 #include <QDebug>
 #include <QGuiApplication>
@@ -13,7 +12,7 @@ int main(int argc, char *argv[]) {
 
     QGuiApplication app(argc, argv);
 
-//    qmlRegisterType<GrabWindow>("daVinci", 1, 0, "GrabWindow");
+    qmlRegisterType<GrabWindow>("daVinci", 1, 0, "GrabWindow");
 //    qmlRegisterType<Screenshot>("daVinci", 1, 0, "Screenshot");
 
     QUrl systemTrayUrl = QUrl(QStringLiteral("qrc:/qml/SystemTray.qml"));

@@ -14,8 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     settings.cpp \
-    grabwindow.cpp \
-    screenshot.cpp
+    grab_window.cpp
 
 RESOURCES += qml.qrc \
     img.qrc
@@ -35,5 +34,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     settings.h \
-    grabwindow.h \
-    screenshot.h
+    grab_window.h
